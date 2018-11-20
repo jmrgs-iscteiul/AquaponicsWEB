@@ -5,11 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Aquaponics_Web_Portal.Models;
+using AquaponicsWebPortal.EntityFramework.Entities;
+using AquaponicsWebPortal.EntityFramework;
 
 namespace Aquaponics_Web_Portal.Controllers
 {
     public class HomeController : Controller
     {
+
+        AquaponicsContext context;
+
+        public HomeController()
+        {
+            this.context = new AquaponicsContext();
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -18,6 +28,13 @@ namespace Aquaponics_Web_Portal.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
+
+            Events ev = new Events();
+            ev.Timestamp = DateTime.Now;
+            ev.Event = 10;
+
+            context.Events.Add(ev);
+            context.SaveChanges();
 
             return View();
         }

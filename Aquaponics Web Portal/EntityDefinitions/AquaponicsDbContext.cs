@@ -6,11 +6,11 @@ namespace AquaponicsWebPortal.EntityFramework
 {
     public class AquaponicsContext : DbContext
     {
-        public AquaponicsContext() : base("Aquaponics")
+        public AquaponicsContext() : base("name=AquaponicsDbContext")
         {
 
         }
 
-        public DbSet<Events> Events { get; set; }
+        public IDbSet<Events> Events { get; set; }
     }
 }
